@@ -32,7 +32,7 @@
   transform: rotateY(var(--degree)) translateZ(var(--translate-z));
 }
 .HannyaRoller-letter {
-  font-family:  a-otf-midashi-mi-ma31-pr6n, "Yux Mincho", sans-serif;
+  font-family: a-otf-midashi-mi-ma31-pr6n, "Yux Mincho", sans-serif;
   font-weight: bold;
   line-height: 1em;
   padding-bottom: calc((var(--surface-height) - 1em) / (var(--letters-in-line) - 1) - 1em);
