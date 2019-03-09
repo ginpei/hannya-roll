@@ -14,15 +14,15 @@
   --degree: 0deg;
 
   font-size: 5vw;
-  height: 1em;
   left: calc(50% - 0.5em);
-  line-height: 1em;
   position: absolute;
-  text-align: center;
   transform: rotateY(var(--degree)) translateZ(40vw);
   top: calc(50% - 4em);
-  width: 1em;
 }
 .HannyaRoller-letter {
+  height: 1em;
+  line-height: 1em;
+  text-align: center;
   text-shadow: 0 0 3px #ffff;
+  width: 1em;
 }
