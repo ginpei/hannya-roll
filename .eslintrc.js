@@ -11,6 +11,12 @@ module.exports = {
       "error",
       "always",
     ],
+    "no-underscore-dangle": [
+      "error",
+      {
+        "allowAfterThis": true,
+      },
+    ],
     "class-methods-use-this": "off",
     "import/extensions": [
       "error",

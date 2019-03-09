@@ -5,12 +5,16 @@ export default class HannyaRoller {
    * @param {{ el: Element, text: string }} options
    */
   constructor ({ el, text }) {
-    this.el = el;
-    this.text = text;
-    this.nLines = 40;
+    this._el = el;
+    this._text = text;
+    this._nLines = 40;
   }
 
   start () {
+    this._buildElements();
+  }
+
+  _buildElements () {
     this.elSpace = document.createElement('div');
     this.elSpace.classList.add('HannyaRoller-space');
 
@@ -18,7 +22,7 @@ export default class HannyaRoller {
     elRoller.classList.add('HannyaRoller-roller');
     this.elSpace.appendChild(elRoller);
 
-    const elLineList = new Array(this.nLines).fill(0)
+    const elLineList = new Array(this._nLines).fill(0)
       .map((_, index, { length }) => {
         const progress = index / length;
         const degree = -360 * progress;
@@ -31,8 +35,8 @@ export default class HannyaRoller {
         return elLine;
       });
 
-    const nLettersInLine = Math.ceil(this.text.length / this.nLines);
-    [...this.text].forEach((letter, index) => {
+    const nLettersInLine = Math.ceil(this._text.length / this._nLines);
+    [...this._text].forEach((letter, index) => {
       const elLetter = document.createElement('div');
       elLetter.classList.add('HannyaRoller-letter');
       elLetter.textContent = letter;
@@ -42,11 +46,11 @@ export default class HannyaRoller {
       elLine.appendChild(elLetter);
     });
 
-    this.el.appendChild(this.elSpace);
+    this._el.appendChild(this.elSpace);
   }
 
   destroy () {
-    this.el.removeChild(this.elSpace);
+    this._el.removeChild(this.elSpace);
     this.elSpace = null;
   }
 }
