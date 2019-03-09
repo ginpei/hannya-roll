@@ -12,17 +12,32 @@ export default class HannyaRoller {
   }
 
   start () {
-    const screenWidth = this._el.clientWidth;
-    const screenHeight = this._el.clientHeight;
-    this._buildElements(screenWidth, screenHeight);
+    this._buildElements();
+    this.updateLayout();
   }
 
-  /**
-   * @param {number} screenWidth
-   * @param {number} screenHeight
-   */
-  _buildElements (screenWidth, screenHeight) {
+  _buildElements () {
+    this.elSpace = document.createElement('div');
+    this.elSpace.classList.add('HannyaRoller-space');
+
+    this.elRoller = document.createElement('div');
+    this.elRoller.classList.add('HannyaRoller-roller');
+    this.elSpace.appendChild(this.elRoller);
+
+    this.elLetterList = [...this._text].map((letter) => {
+      const elLetter = document.createElement('div');
+      elLetter.classList.add('HannyaRoller-letter');
+      elLetter.textContent = letter;
+      return elLetter;
+    });
+
+    this._el.appendChild(this.elSpace);
+  }
+
+  updateLayout () {
     const { length } = this._text;
+    const screenWidth = this._el.clientWidth;
+    const screenHeight = this._el.clientHeight;
     const {
       fontSize,
       nLettersInLine,
@@ -30,15 +45,10 @@ export default class HannyaRoller {
       surfaceHeight,
     } = this._findBestLayout(length, screenWidth, screenHeight);
 
-    this.elSpace = document.createElement('div');
-    this.elSpace.classList.add('HannyaRoller-space');
-
-    const elRoller = document.createElement('div');
-    elRoller.classList.add('HannyaRoller-roller');
-    elRoller.style.setProperty('--surface-height', `${surfaceHeight}px`);
-    elRoller.style.setProperty('--font-size', `${fontSize}px`);
-    elRoller.style.setProperty('--letters-in-line', `${nLettersInLine}`);
-    this.elSpace.appendChild(elRoller);
+    this.elRoller.style.setProperty('--surface-height', `${surfaceHeight}px`);
+    this.elRoller.style.setProperty('--font-size', `${fontSize}px`);
+    this.elRoller.style.setProperty('--letters-in-line', `${nLettersInLine}`);
+    this.elRoller.innerHTML = '';
 
     const elLineList = new Array(nLines).fill(0)
       .map((_, index) => {
@@ -48,22 +58,16 @@ export default class HannyaRoller {
         const elLine = document.createElement('div');
         elLine.classList.add('HannyaRoller-line');
         elLine.style.setProperty('--degree', `${degree}deg`);
-        elRoller.appendChild(elLine);
+        this.elRoller.appendChild(elLine);
 
         return elLine;
       });
 
-    [...this._text].forEach((letter, index) => {
-      const elLetter = document.createElement('div');
-      elLetter.classList.add('HannyaRoller-letter');
-      elLetter.textContent = letter;
-
+    this.elLetterList.forEach((elLetter, index) => {
       const lineIndex = Math.floor(index / nLettersInLine);
       const elLine = elLineList[lineIndex];
       elLine.appendChild(elLetter);
     });
-
-    this._el.appendChild(this.elSpace);
   }
 
   /**
