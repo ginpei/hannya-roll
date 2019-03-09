@@ -1,4 +1,6 @@
 .HannyaRoller-space {
+  --space-rotate-y: 0; /* set in style attr */
+
   height: 100vh;
   overflow: hidden;
   width: 100vw;
@@ -7,15 +9,14 @@
   --font-size: 0; /* set in style attr */
   --letters-in-line: 0; /* set in style attr */
   --perspective: 100vw;
-  --rotate-x: 0; /* set in style attr */
-  --rotate-y: 0; /* set in style attr */
+  --rotate-x: 0deg;
   --surface-height: 0; /* set in style attr */
 
   font-size: var(--font-size);
   height: 100%;
   position: relative;
   transform: perspective(var(--perspective)) rotateX(var(--rotate-x))
-    rotateY(var(--rotate-y));
+    rotateY(var(--space-rotate-y));
   transform-style: preserve-3d;
   width: 100%;
 }

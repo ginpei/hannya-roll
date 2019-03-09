@@ -16,6 +16,7 @@ export default class HannyaRoller {
   start () {
     this._el.appendChild(this.elSpace);
     this.updateLayout();
+    this._startAnimation();
   }
 
   _buildElements () {
@@ -99,6 +100,23 @@ export default class HannyaRoller {
       }
     }
     return layout;
+  }
+
+  _startAnimation () {
+    const rpm = 2; // rotation per minute
+    const startDegree = 0;
+
+    const startedAt = Date.now();
+    const cycle = 1000 * 60 / rpm;
+    const update = () => {
+      const progress = ((Date.now() - startedAt) % cycle) / cycle;
+
+      const degree = (startDegree + progress * 360) % 360;
+      this.elSpace.style.setProperty('--space-rotate-y', `${degree}deg`);
+
+      requestAnimationFrame(update);
+    };
+    update();
   }
 
   destroy () {
