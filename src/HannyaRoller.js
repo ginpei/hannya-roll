@@ -37,6 +37,7 @@ export default class HannyaRoller {
     elRoller.classList.add('HannyaRoller-roller');
     elRoller.style.setProperty('--surface-height', `${surfaceHeight}px`);
     elRoller.style.setProperty('--font-size', `${fontSize}px`);
+    elRoller.style.setProperty('--letters-in-line', `${nLettersInLine}`);
     this.elSpace.appendChild(elRoller);
 
     const elLineList = new Array(nLines).fill(0)
@@ -85,7 +86,7 @@ export default class HannyaRoller {
       const nLettersInLine = Math.floor(surfaceHeight / fontSize);
       const nLines = Math.ceil(length / nLettersInLine);
       const width = nLines * fontSize;
-      if (width < surfaceWidth) {
+      if (width < (surfaceWidth / 2)) {
         layout.fontSize = fontSize;
         layout.nLettersInLine = nLettersInLine;
         layout.nLines = nLines;

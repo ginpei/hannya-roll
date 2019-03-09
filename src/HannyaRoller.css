@@ -7,6 +7,7 @@
   --perspective: 100vw;
   --surface-height: 0; /* set in style attr */
   --font-size: 0; /* set in style attr */
+  --letters-in-line: 0; /* set in style attr */
   --rotate-x: 0; /* set in style attr */
   --rotate-y: 0; /* set in style attr */
 
@@ -22,17 +23,13 @@
   --degree: 0deg; /* set in style attr */
   --translate-z: calc(var(--perspective) * 0.4);
 
-  display: flex;
-  flex-direction: column;
-  height: var(--surface-height);
-  justify-content: center;
   left: calc(50% - 0.5em);
   position: absolute;
   top: calc(50% - (var(--surface-height) / 2));
   transform: rotateY(var(--degree)) translateZ(var(--translate-z));
 }
 .HannyaRoller-letter {
-  height: 1em;
+  padding-bottom: calc((var(--surface-height) - 1em) / (var(--letters-in-line) - 1) - 1em);
   line-height: 1em;
   text-align: center;
   width: 1em;
