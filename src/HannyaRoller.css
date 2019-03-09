@@ -1,6 +1,8 @@
 .HannyaRoller-space {
   --space-rotate-y: 0; /* set in style attr */
 
+  background-color: black;
+  color: white;
   height: 100vh;
   overflow: hidden;
   width: 100vw;
