@@ -50,6 +50,7 @@ export default class HannyaRoller {
     this.elRoller.style.setProperty('--letters-in-line', `${nLettersInLine}`);
     this.elRoller.innerHTML = '';
 
+    // faster than for()
     const elLineList = new Array(nLines).fill(0)
       .map((_, index) => {
         const progress = index / nLines;
