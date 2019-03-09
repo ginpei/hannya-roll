@@ -4,12 +4,12 @@
   width: 100vw;
 }
 .HannyaRoller-roller {
-  --perspective: 100vw;
-  --surface-height: 0; /* set in style attr */
   --font-size: 0; /* set in style attr */
   --letters-in-line: 0; /* set in style attr */
+  --perspective: 100vw;
   --rotate-x: 0; /* set in style attr */
   --rotate-y: 0; /* set in style attr */
+  --surface-height: 0; /* set in style attr */
 
   font-size: var(--font-size);
   height: 100%;
@@ -29,8 +29,8 @@
   transform: rotateY(var(--degree)) translateZ(var(--translate-z));
 }
 .HannyaRoller-letter {
-  padding-bottom: calc((var(--surface-height) - 1em) / (var(--letters-in-line) - 1) - 1em);
   line-height: 1em;
+  padding-bottom: calc((var(--surface-height) - 1em) / (var(--letters-in-line) - 1) - 1em);
   text-align: center;
   width: 1em;
 }
