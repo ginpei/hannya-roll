@@ -9,10 +9,12 @@ export default class HannyaRoller {
   constructor ({ el, text }) {
     this._el = el;
     this._text = text;
+
+    this._buildElements();
   }
 
   start () {
-    this._buildElements();
+    this._el.appendChild(this.elSpace);
     this.updateLayout();
   }
 
@@ -30,8 +32,6 @@ export default class HannyaRoller {
       elLetter.textContent = letter;
       return elLetter;
     });
-
-    this._el.appendChild(this.elSpace);
   }
 
   updateLayout () {
@@ -103,6 +103,5 @@ export default class HannyaRoller {
 
   destroy () {
     this._el.removeChild(this.elSpace);
-    this.elSpace = null;
   }
 }
