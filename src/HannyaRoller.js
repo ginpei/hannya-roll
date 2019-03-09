@@ -110,7 +110,7 @@ export default class HannyaRoller {
     const startedAt = Date.now();
     const cycle = 1000 * 60 / rpm;
 
-    this.hRotation = animate(60, () => {
+    this.destroyAnimation = animate(60, () => {
       const progress = ((Date.now() - startedAt) % cycle) / cycle;
 
       const degree = (startDegree + progress * 360) % 360;
@@ -120,5 +120,6 @@ export default class HannyaRoller {
 
   destroy () {
     this._el.removeChild(this.elSpace);
+    this.destroyAnimation();
   }
 }
