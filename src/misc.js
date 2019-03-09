@@ -12,3 +12,23 @@ export function throttle (callback) {
     });
   };
 }
+
+/**
+ * @param {number} fps
+ * @param {() => void} render
+ */
+export function animate (fps, render) {
+  const interval = 1000 / fps;
+  let handle = 0;
+  let drawnAt = 0;
+  const draw = () => {
+    const now = Date.now();
+    if (now - drawnAt > interval) {
+      render();
+      drawnAt = now;
+    }
+    handle = window.requestAnimationFrame(() => draw());
+  };
+  draw();
+  return () => window.cancelAnimationFrame(handle);
+}

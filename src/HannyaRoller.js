@@ -1,6 +1,7 @@
 // @ts-check
 
 import './HannyaRoller.css';
+import { animate } from './misc';
 
 export default class HannyaRoller {
   /**
@@ -108,15 +109,13 @@ export default class HannyaRoller {
 
     const startedAt = Date.now();
     const cycle = 1000 * 60 / rpm;
-    const update = () => {
+
+    this.hRotation = animate(60, () => {
       const progress = ((Date.now() - startedAt) % cycle) / cycle;
 
       const degree = (startDegree + progress * 360) % 360;
       this.elSpace.style.setProperty('--space-rotate-y', `${degree}deg`);
-
-      requestAnimationFrame(update);
-    };
-    update();
+    });
   }
 
   destroy () {
