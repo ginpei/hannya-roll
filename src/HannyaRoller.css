@@ -4,20 +4,32 @@
   width: 100vw;
 }
 .HannyaRoller-roller {
+  --perspective: 100vw;
+  --surface-height: 0; /* set in style attr */
+  --font-size: 0; /* set in style attr */
+  --rotate-x: 0; /* set in style attr */
+  --rotate-y: 0; /* set in style attr */
+
+  font-size: var(--font-size);
   height: 100%;
   position: relative;
-  transform: perspective(80vw) rotateX(-5deg);
+  transform: perspective(var(--perspective)) rotateX(var(--rotate-x))
+    rotateY(var(--rotate-y));
   transform-style: preserve-3d;
   width: 100%;
 }
 .HannyaRoller-line {
-  --degree: 0deg;
+  --degree: 0deg; /* set in style attr */
+  --translate-z: calc(var(--perspective) * 0.4);
 
-  font-size: 5vw;
+  display: flex;
+  flex-direction: column;
+  height: var(--surface-height);
+  justify-content: center;
   left: calc(50% - 0.5em);
   position: absolute;
-  transform: rotateY(var(--degree)) translateZ(40vw);
-  top: calc(50% - 4em);
+  top: calc(50% - (var(--surface-height) / 2));
+  transform: rotateY(var(--degree)) translateZ(var(--translate-z));
 }
 .HannyaRoller-letter {
   height: 1em;
