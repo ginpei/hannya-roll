@@ -96,7 +96,7 @@ export default class HannyaRoller {
     };
     for (let fontSize = screenWidth; fontSize > 0; fontSize -= 1) {
       const nLettersInLine = Math.floor(surfaceHeight / fontSize);
-      const nLines = Math.ceil(length / nLettersInLine);
+      const nLines = Math.ceil(length / nLettersInLine) + 1;
       const width = nLines * fontSize;
       if (width < (surfaceWidth / 2)) {
         layout.fontSize = fontSize;
