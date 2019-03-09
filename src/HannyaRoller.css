@@ -1,0 +1,29 @@
+.HannyaRoller-space {
+  background-color: tomato;
+  height: 100vh;
+  overflow: hidden;
+  width: 100vw;
+}
+.HannyaRoller-roller {
+  height: 100%;
+  position: relative;
+  transform: perspective(80vw) rotateX(-5deg);
+  transform-style: preserve-3d;
+  width: 100%;
+}
+.HannyaRoller-line {
+  --degree: 0deg;
+
+  font-size: 5vw;
+  height: 1em;
+  left: calc(50% - 0.5em);
+  line-height: 1em;
+  position: absolute;
+  text-align: center;
+  transform: rotateY(var(--degree)) translateZ(40vw);
+  top: calc(50% - 4em);
+  width: 1em;
+}
+.HannyaRoller-letter {
+  text-shadow: 0 0 3px #ffff;
+}
