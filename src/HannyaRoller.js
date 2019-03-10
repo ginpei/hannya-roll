@@ -107,7 +107,7 @@ export default class HannyaRoller {
   }
 
   _startAnimation () {
-    const rpm = 2; // rotation per minute
+    const rpm = 2; // revolutions per minute
     const progressOffset = 0;
 
     const startedAt = Date.now();
