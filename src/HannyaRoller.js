@@ -34,17 +34,15 @@ export default class HannyaRoller {
     this.elRoller.style.setProperty('--surface-height', `${surfaceHeight}px`);
     this.elRoller.style.setProperty('--font-size', `${fontSize}px`);
     this.elRoller.style.setProperty('--letters-in-line', `${nLettersInLine}`);
+    this.elRoller.style.setProperty('--lines', `${nLines}`);
     this.elRoller.innerHTML = '';
 
     // faster than for()
     const elLineList = new Array(nLines).fill(0)
       .map((_, index) => {
-        const progress = index / nLines;
-        const degree = -360 * progress;
-
         const elLine = document.createElement('div');
         elLine.classList.add('HannyaRoller-line');
-        elLine.style.setProperty('--degree', `${degree}deg`);
+        elLine.style.setProperty('--line-index', `${index}`);
         this.elRoller.appendChild(elLine);
 
         return elLine;
@@ -110,16 +108,16 @@ export default class HannyaRoller {
 
   _startAnimation () {
     const rpm = 2; // rotation per minute
-    const startDegree = 0;
+    const progressOffset = 0;
 
     const startedAt = Date.now();
     const cycle = 1000 * 60 / rpm;
 
     this.destroyAnimation = animate(60, () => {
-      const progress = ((Date.now() - startedAt) % cycle) / cycle;
-
-      const degree = (startDegree + progress * 360) % 360;
-      this.elSpace.style.setProperty('--space-rotate-y', `${degree}deg`);
+      const timeProgress = ((Date.now() - startedAt) % cycle) / cycle;
+      const sum = progressOffset + timeProgress;
+      const progress = (sum) - Math.floor(sum);
+      this.elSpace.style.setProperty('--rotation-progress', `${progress}`);
     });
   }
 }

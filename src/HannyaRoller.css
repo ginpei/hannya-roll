@@ -1,5 +1,5 @@
 .HannyaRoller-space {
-  --space-rotate-y: 0; /* set in style attr */
+  --rotation-progress: 0; /* set in style attr */
 
   background-color: black;
   color: white;
@@ -10,26 +10,30 @@
 .HannyaRoller-roller {
   --font-size: 0; /* set in style attr */
   --letters-in-line: 0; /* set in style attr */
+  --lines: 0; /* set in style attr */
   --perspective: 100vw;
   --rotate-x: 0deg;
   --surface-height: 0; /* set in style attr */
 
+  background-color: #0006;
   font-size: var(--font-size);
   height: 100%;
   position: relative;
-  transform: perspective(var(--perspective)) rotateX(var(--rotate-x))
-    rotateY(var(--space-rotate-y));
+  transform: perspective(var(--perspective));
   transform-style: preserve-3d;
   width: 100%;
 }
 .HannyaRoller-line {
-  --degree: 0deg; /* set in style attr */
-  --translate-z: calc(var(--perspective) * 0.4);
+  --line-index: 0; /* set in style attr */
+  --line-progress: calc(var(--line-index) / var(--lines));
+  --line-rotation-progress: calc(var(--rotation-progress) - var(--line-progress));
 
   left: calc(50% - 0.5em);
   position: absolute;
   top: calc(50% - (var(--surface-height) / 2));
-  transform: rotateY(var(--degree)) translateZ(var(--translate-z));
+  transform:
+    rotateY(calc(var(--line-rotation-progress) * 360deg))
+    translateZ(calc(var(--perspective) * 0.4));
 }
 .HannyaRoller-letter {
   font-family: a-otf-midashi-mi-ma31-pr6n, "Yux Mincho", sans-serif;
