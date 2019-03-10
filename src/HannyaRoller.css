@@ -15,6 +15,7 @@
   --rotate-x: 0deg;
   --surface-height: 0; /* set in style attr */
 
+  animation: HannyaRoller-rollerInitialRotate 3s cubic-bezier(0.23, 1, 0.32, 1);
   background-color: #0006;
   font-size: var(--font-size);
   height: 100%;
@@ -42,4 +43,9 @@
   padding-bottom: calc((var(--surface-height) - 1em) / (var(--letters-in-line) - 1) - 1em);
   text-align: center;
   width: 1em;
+}
+
+@keyframes HannyaRoller-rollerInitialRotate {
+  0% { transform: perspective(var(--perspective)) rotateY(-720deg); }
+  100% { transform: perspective(var(--perspective)) rotateY(0deg); }
 }
