@@ -24,35 +24,8 @@ export default class HannyaRoller {
     const { length } = this._text;
     const screenWidth = this._el.clientWidth;
     const screenHeight = this._el.clientHeight;
-    const {
-      fontSize,
-      nLettersInLine,
-      nLines,
-      surfaceHeight,
-    } = this._findBestLayout(length, screenWidth, screenHeight);
-
-    this.elRoller.style.setProperty('--surface-height', `${surfaceHeight}px`);
-    this.elRoller.style.setProperty('--font-size', `${fontSize}px`);
-    this.elRoller.style.setProperty('--letters-in-line', `${nLettersInLine}`);
-    this.elRoller.style.setProperty('--lines', `${nLines}`);
-    this.elRoller.innerHTML = '';
-
-    // faster than for()
-    const elLineList = new Array(nLines).fill(0)
-      .map((_, index) => {
-        const elLine = document.createElement('div');
-        elLine.classList.add('HannyaRoller-line');
-        elLine.style.setProperty('--line-index', `${index}`);
-        this.elRoller.appendChild(elLine);
-
-        return elLine;
-      });
-
-    this.elLetterList.forEach((elLetter, index) => {
-      const lineIndex = Math.floor(index / nLettersInLine);
-      const elLine = elLineList[lineIndex];
-      elLine.appendChild(elLetter);
-    });
+    const layout = this._findBestLayout(length, screenWidth, screenHeight);
+    this._render(layout);
   }
 
   destroy () {
@@ -104,6 +77,39 @@ export default class HannyaRoller {
       }
     }
     return layout;
+  }
+
+  /**
+   * @param {IRollerLayout} layout
+   */
+  _render ({
+    fontSize,
+    nLettersInLine,
+    nLines,
+    surfaceHeight,
+  }) {
+    this.elRoller.style.setProperty('--surface-height', `${surfaceHeight}px`);
+    this.elRoller.style.setProperty('--font-size', `${fontSize}px`);
+    this.elRoller.style.setProperty('--letters-in-line', `${nLettersInLine}`);
+    this.elRoller.style.setProperty('--lines', `${nLines}`);
+    this.elRoller.innerHTML = '';
+
+    // faster than for()
+    const elLineList = new Array(nLines).fill(0)
+      .map((_, index) => {
+        const elLine = document.createElement('div');
+        elLine.classList.add('HannyaRoller-line');
+        elLine.style.setProperty('--line-index', `${index}`);
+        this.elRoller.appendChild(elLine);
+
+        return elLine;
+      });
+
+    this.elLetterList.forEach((elLetter, index) => {
+      const lineIndex = Math.floor(index / nLettersInLine);
+      const elLine = elLineList[lineIndex];
+      elLine.appendChild(elLetter);
+    });
   }
 
   _startAnimation () {
