@@ -8,13 +8,13 @@ const isProduction = process.env.NODE_ENV === 'production';
 const publicPath = isProduction ? '/hannya-roll' : '';
 
 module.exports = {
-  mode: 'development',
+  mode: isProduction ? 'production' : 'development',
   entry: './src/index.js',
   output: {
     filename: 'main.js',
     publicPath,
   },
-  devtool: 'inline-source-map',
+  devtool: isProduction ? 'source-map' : 'cheap-module-source-map',
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
   },
@@ -38,6 +38,18 @@ module.exports = {
       },
     ]),
     new HtmlWebpackPlugin({
+      minify: isProduction && {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true,
+      },
       template: './public/index.html',
     }),
     new InterpolateHtmlPlugin({
@@ -45,4 +57,7 @@ module.exports = {
       PUBLIC_URL: publicPath,
     }),
   ],
+  optimization: {
+    minimize: isProduction,
+  },
 };

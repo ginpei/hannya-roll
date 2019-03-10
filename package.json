@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "build": "webpack --config config/webpack.config.js",
+    "build": "echo NODE_ENV=$NODE_ENV && webpack --config config/webpack.config.js",
     "publish": "npm run build && push-dir --dir=dist --branch=gh-pages --cleanup",
     "start": "webpack-dev-server --config config/webpack.config.js --open",
     "type-check": "tsc"
