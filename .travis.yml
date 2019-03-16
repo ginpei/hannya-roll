@@ -9,7 +9,7 @@ script:
   - npm run type-check
   - npm run lint
   - npm run test -- --coverage
-  - npm run build
+  - NODE_ENV=production npm run build
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 deploy:
