@@ -9,5 +9,14 @@ script:
   - npm run type-check
   - npm run lint
   - npm run test -- --coverage
+  - npm run build
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  keep-history: true
+  local-dir: "build"
+  on:
+    branch: release
