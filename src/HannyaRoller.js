@@ -1,5 +1,3 @@
-// @ts-check
-
 import './HannyaRoller.css';
 import { animate } from './misc';
 
